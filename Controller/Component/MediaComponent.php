@@ -31,10 +31,12 @@ class MediaComponent extends Component{
             rename($tmp, IMAGES . $dest);
             return true;
         }
-        if (!file_exists($dest_file)) {
+        if (file_exists($tmp)) {
             require_once APP . 'Plugin' . DS . 'Media' . DS . 'Vendor' . DS . 'imagine.phar';
             $imagine = new Imagine\Gd\Imagine();
             $imagine->open($tmp)->thumbnail(new Imagine\Image\Box($width, $height), Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND)->save(IMAGES . $dest, array('quality' => 90));
+        } else {
+            return false;
         }
         return true;
     }
