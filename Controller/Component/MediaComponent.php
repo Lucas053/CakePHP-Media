@@ -35,6 +35,7 @@ class MediaComponent extends Component{
             require_once APP . 'Plugin' . DS . 'Media' . DS . 'Vendor' . DS . 'imagine.phar';
             $imagine = new Imagine\Gd\Imagine();
             $imagine->open($tmp)->thumbnail(new Imagine\Image\Box($width, $height), Imagine\Image\ImageInterface::THUMBNAIL_OUTBOUND)->save(IMAGES . $dest, array('quality' => 90));
+            unlink($tmp);
         } else {
             return false;
         }
